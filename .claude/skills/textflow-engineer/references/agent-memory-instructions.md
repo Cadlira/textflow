@@ -1,37 +1,82 @@
 # Agent Memory Instructions — TextFlow
 
-Instruções de uso do `agent-memory` CLI para o projeto TextFlow.
+Instruções para gerenciar memória persistente de aprendizados usando o sistema file-based.
 
-## Setup
+## Estrutura
 
-O `agent-memory` CLI é a ferramenta padrão para gerenciar memória persistente de aprendizados.
+```
+%USERPROFILE%\.agent-memory\projects\textflow\
+├── learnings/       # Aprendizados reutilizáveis
+├── decisions/       # Decisões de arquitetura
+├── patterns/        # Padrões de implementação
+└── sessions/        # Sessões de trabalho em andamento
+```
 
-Storage externo padrão: `%USERPROFILE%\.agent-memory\projects\textflow`
-
-Projeto CLI: `textflow`
-
-## Comandos
+## Operações
 
 ### Buscar aprendizados (antes do trabalho)
+
+Use Grep e Glob no diretório de memória:
+
 ```bash
-agent-memory search --project textflow --query "<tema>" --limit 5
+# Busca por tags e palavras-chave nos arquivos de aprendizado
+grep -rl "<tema>" "%USERPROFILE%\.agent-memory\projects\textflow\"
+
+# Ou listar aprendizados recentes
+ls -t "%USERPROFILE%\.agent-memory\projects\textflow\learnings\"
 ```
+
+Status de retorno:
+- `found`: existem arquivos com conteúdo relevante
+- `empty`: diretório existe mas sem correspondência
+- `blocked`: diretório inacessível ou permissão negada
 
 ### Registrar aprendizado (depois do trabalho)
-```bash
-agent-memory write --project textflow --topic "<tema>" --tags "<tag1,tag2>" --sources "<paths>" --content "<descricao>"
+
+Criar arquivo markdown com frontmatter YAML no diretório `learnings/`:
+
+```markdown
+---
+date: YYYY-MM-DD
+topic: kebab-case-topic
+tags: [tag1, tag2]
+sources: [path/to/file1, path/to/file2]
+---
+
+# Título
+
+## O que foi feito
+Breve descrição.
+
+## O que funcionou
+Resultado positivo.
+
+## O que evitar
+Gotchas, erros, falsas premissas.
+
+## Levar adiante
+Regra, padrão ou decisão para o futuro.
 ```
 
+Nome do arquivo: `YYYY-MM-DD-<topic>.md`
+
 ### Verificar registro
+
+Após escrever, confirmar que o arquivo é recuperável:
+
 ```bash
-agent-memory verify --project textflow --query "<tema>" --expected-topic "<tema>"
+# Verificar que o arquivo existe e tem conteúdo
+wc -l "%USERPROFILE%\.agent-memory\projects\textflow\learnings\YYYY-MM-DD-<topic>.md"
+
+# Verificar que é encontrável por busca
+grep -l "<tema>" "%USERPROFILE%\.agent-memory\projects\textflow\learnings\"
 ```
 
 ## Isolamento
 
-- Use sempre `--project textflow`
-- Nunca use `--project default`, `--project global` ou `--project memory`
-- Se o CLI não oferecer isolamento, marque como `blocked`
+- Cada projeto tem seu diretório isolado em `projects\<nome-do-projeto>\`
+- Nunca misture aprendizados de projetos diferentes
+- Se o diretório do projeto não existir, crie-o antes de usar
 
 ## O que armazenar
 
@@ -39,7 +84,7 @@ agent-memory verify --project textflow --query "<tema>" --expected-topic "<tema>
 - Gotchas (CSP, service worker lifecycle, OpenRouter rate limits)
 - Achados de QA reutilizáveis
 - Decisões de arquitetura que afetam o futuro
-- Templates de prompt que funcionaram bem em português
+- Templates de prompt que funcionaram bem
 
 ## O que NÃO armazenar
 
@@ -50,8 +95,7 @@ agent-memory verify --project textflow --query "<tema>" --expected-topic "<tema>
 
 ## Fallback
 
-Se `agent-memory` CLI não estiver disponível:
-1. Memory Coordinator tenta via bash tool
-2. Se falhar, reporta `blocked` com motivo
-3. NÃO crie arquivos locais de memória no repositório
-4. NÃO carregue `rag-implementation` ou `deep-agents-memory` sem aprovação
+Se o diretório de memória estiver inacessível:
+1. Memory Coordinator reporta `blocked` com motivo
+2. NÃO crie arquivos de memória dentro do repositório do projeto
+3. NÃO carregue `rag-implementation` ou `deep-agents-memory` sem aprovação

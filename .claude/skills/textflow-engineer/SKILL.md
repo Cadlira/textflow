@@ -50,23 +50,20 @@ Use `learning-rag-memory` em modo curto como governança de memória.
 
 Agente responsável pela operação de memória: `agents/memory-coordinator.md`.
 
-Memória persistente deve ficar fora do repositório, em namespace físico por projeto: `%USERPROFILE%\.agent-memory\projects\textflow`. Use sempre o projeto `textflow` no `agent-memory` CLI.
-
-O `agent-memory` não deve gravar aprendizados do TextFlow em arquivo/base genérica compartilhada com outros projetos. Se o CLI não garantir isolamento real por `--project textflow` ou por diretório equivalente, marque memória como `blocked` e não persista aprendizados até corrigir a configuração.
+Memória persistente deve ficar fora do repositório, no diretório: `%USERPROFILE%\.agent-memory\projects\textflow\`. O sistema é baseado em arquivos markdown com frontmatter YAML.
 
 Antes da implementação:
 - Peça briefing curto de aprendizados anteriores ao `memory-coordinator`
-- Quando `memory-coordinator` não estiver disponível e houver terminal, execute `agent-memory search --project textflow --query "<tema>"`
+- Quando `memory-coordinator` não estiver disponível, busque com Grep no diretório de memória: `grep -rli "<tema>" "%USERPROFILE%\.agent-memory\projects\textflow\"`
 - Não crie arquivos de memória, índices, vetores, sessões ou bases de conhecimento neste repositório
 - Não carregue `rag-implementation` automaticamente
 - Não carregue `deep-agents-memory` automaticamente; use apenas se a demanda for implementar memória/RAG/Deep Agent ou se o usuário aprovar
 
 Após a implementação:
-- Envie aprendizados reutilizáveis ao `memory-coordinator` para registro curto fora do repositório
-- Quando `memory-coordinator` não estiver disponível e houver aprendizado reutilizável, execute `agent-memory write ...` e depois `agent-memory verify ...`
+- Envie aprendizados reutilizáveis ao `memory-coordinator` para registro em arquivo markdown fora do repositório
 - Se não houver aprendizado reutilizável, registre `skipped - trivial/no reusable learning`
 - Nunca crie `.ai/memory` nem qualquer pasta de memória persistente no projeto
-- Nunca use projeto genérico (`default`, `global`, `memory`) para aprendizados do TextFlow
+- Nunca misture aprendizados de projetos diferentes no mesmo diretório
 
 ## Gestão de progresso com TodoWrite
 
