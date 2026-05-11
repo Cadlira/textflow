@@ -135,20 +135,31 @@
 
 ---
 
-## Fase 7 — Polimento da Extensão
+## Fase 7 — Polimento da Extensão + Testes Automatizados
 
-**Objetivo:** UX refinada, ícones, tratamento de borda.
+**Objetivo:** Testes automáticos, UX refinada, ícones, atalhos, cross-browser.
 
-- [ ] `7.1` Criar ícones da extensão (16px, 48px, 128px)
-- [ ] `7.2` Implementar animação suave no botão flutuante (fade in/out)
-- [ ] `7.3` Implementar atalho de teclado: `Ctrl+Shift+T` abre menu no texto selecionado
-- [ ] `7.4` Implementar "Reescrever com 1 clique" — último tom usado com shift+click
-- [ ] `7.5` Implementar indicador de quota no botão flutuante (x/5 free)
-- [ ] `7.6` Implementar mensagens de erro amigáveis em português
-- [ ] `7.7` Implementar Google OAuth (login sem senha) — opcional, simplifica onboarding
-- [ ] `7.8` Testar cross-browser: Chrome, Edge, Brave
-- [ ] `7.9` Revisão de acessibilidade: contraste, foco de teclado, screen reader
-- [ ] `7.10` Otimizar content script: evitar memory leaks, performance em sites pesados
+### Testes Automatizados
+- [ ] `7.1` Instalar e configurar vitest no backend (`backend/vitest.config.ts`)
+- [ ] `7.2` Testes de auth: POST /auth/register (201 + 409 duplicado), POST /auth/login (200 + 401)
+- [ ] `7.3` Testes de user: GET /user/me (200 autenticado + 401 sem token), PATCH /user/me
+- [ ] `7.4` Testes de AI: POST /ai/process (correct, summarize), verificar resposta + tokens
+- [ ] `7.5` Testes de rate limit: verificar bloqueio após 5 usos (free tier)
+- [ ] `7.6` Criar script Playwright E2E: fluxo popup (login → dashboard → logout)
+- [ ] `7.7` Criar script Playwright E2E: fluxo content script (selecionar texto → AI → resultado)
+- [ ] `7.8` Script de regressão: `npm test` roda todos os testes
+
+### UX & Polimento
+- [ ] `7.9` Criar ícones da extensão (16px, 48px, 128px)
+- [ ] `7.10` Implementar animação suave no botão flutuante (fade in/out)
+- [ ] `7.11` Implementar atalho de teclado: `Ctrl+Shift+T` abre menu no texto selecionado
+- [ ] `7.12` Implementar "Reescrever com 1 clique" — último tom usado com shift+click
+- [ ] `7.13` Implementar indicador de quota no botão flutuante (x/5 free)
+- [ ] `7.14` Implementar mensagens de erro amigáveis em português
+- [ ] `7.15` Implementar Google OAuth (login sem senha) — opcional, simplifica onboarding
+- [ ] `7.16` Testar cross-browser: Chrome, Edge, Brave
+- [ ] `7.17` Revisão de acessibilidade: contraste, foco de teclado, screen reader
+- [ ] `7.18` Otimizar content script: evitar memory leaks, performance em sites pesados
 
 ---
 
@@ -196,10 +207,10 @@
 | 4 | Extension: Background + Auth | 11 | ✅ Completed |
 | 5 | Extension: Popup | 10 | ✅ Completed |
 | 6 | Stripe (Pagamentos) | 9 | ✅ Completed |
-| 7 | Polimento da Extensão | 10 | ⬜ Pending |
+| 7 | Polimento + Testes Automatizados | 18 | ⬜ Pending |
 | 8 | Deploy e Distribuição | 10 | ⬜ Pending |
 | 9 | Pós-Lançamento | 9 | ⬜ Pending |
-| **Total** | | **109** | |
+| **Total** | | **117** | |
 
 ---
 
