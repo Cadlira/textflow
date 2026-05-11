@@ -88,17 +88,17 @@
 
 **Objetivo:** Service worker gerencia autenticação e proxy das chamadas.
 
-- [ ] `4.1` Implementar `extension/background/background.ts` — listeners de mensagem
-- [ ] `4.2` Implementar `extension/background/auth.ts` — gerencia JWT em `chrome.storage.local`
-- [ ] `4.3` Implementar `extension/background/api.ts` — fetch para backend com token Bearer
-- [ ] `4.4` Implementar `extension/background/storage.ts` — wrapper para `chrome.storage.local`
-- [ ] `4.5` Implementar handler `PROCESS_TEXT` — chama backend `/ai/process`, retorna resultado
-- [ ] `4.6` Implementar handler `LOGIN` — chama backend `/auth/login`, armazena token
-- [ ] `4.7` Implementar handler `REGISTER` — chama backend `/auth/register`, armazena token
-- [ ] `4.8` Implementar handler `LOGOUT` — limpa token do storage
-- [ ] `4.9` Implementar handler `GET_AUTH_STATE` — retorna token, plano, uso do dia
-- [ ] `4.10` Implementar `chrome.runtime.onInstalled` — inicializa estado padrão
-- [ ] `4.11` Testar: fluxo completo content → background → backend → resultado na tela
+- [x] `4.1` Implementar `extension/background/background.ts` — listeners de mensagem
+- [x] `4.2` Implementar `extension/background/auth.ts` — gerencia JWT em `chrome.storage.local`
+- [x] `4.3` Implementar `extension/background/api.ts` — fetch para backend com token Bearer
+- [x] `4.4` Implementar `extension/background/storage.ts` — wrapper para `chrome.storage.local`
+- [x] `4.5` Implementar handler `PROCESS_TEXT` — chama backend `/ai/process`, retorna resultado
+- [x] `4.6` Implementar handler `LOGIN` — chama backend `/auth/login`, armazena token
+- [x] `4.7` Implementar handler `REGISTER` — chama backend `/auth/register`, armazena token
+- [x] `4.8` Implementar handler `LOGOUT` — limpa token do storage
+- [x] `4.9` Implementar handler `GET_AUTH_STATE` — retorna token, plano, uso do dia
+- [x] `4.10` Implementar `chrome.runtime.onInstalled` — inicializa estado padrão
+- [x] `4.11` Testar: fluxo completo content → background → backend → resultado na tela
 
 ---
 
@@ -193,7 +193,7 @@
 | 1 | Backend Core | 11 | ✅ Completed |
 | 2 | Integração AI Multi-Provider | 16 | ✅ Completed |
 | 3 | Extension: Content Script | 11 | ✅ Completed |
-| 4 | Extension: Background + Auth | 11 | ⬜ Pending |
+| 4 | Extension: Background + Auth | 11 | ✅ Completed |
 | 5 | Extension: Popup | 10 | ⬜ Pending |
 | 6 | Stripe (Pagamentos) | 9 | ⬜ Pending |
 | 7 | Polimento da Extensão | 10 | ⬜ Pending |
