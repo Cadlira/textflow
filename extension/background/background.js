@@ -38,6 +38,10 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       handleProcessText(message.payload).then(sendResponse);
       return true;
 
+    case 'UPDATE_PROFILE':
+      handleUpdateProfile(message.payload).then(sendResponse);
+      return true;
+
     default:
       sendResponse({ error: 'Unknown message type: ' + message.type });
   }
@@ -123,5 +127,30 @@ async function handleProcessText(payload) {
     return await res.json();
   } catch (err) {
     return { error: 'Não foi possível conectar ao servidor.' };
+  }
+}
+
+// --- Profile ---
+async function handleUpdateProfile(payload) {
+  const auth = await getAuthState();
+  if (!auth.token) return { error: 'Not authenticated' };
+
+  try {
+    const res = await fetch(API_BASE + '/user/me', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + auth.token,
+      },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (data.user) {
+      auth.name = data.user.name;
+      await chrome.storage.local.set({ auth });
+    }
+    return data;
+  } catch (err) {
+    return { error: 'Connection failed' };
   }
 }

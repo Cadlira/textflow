@@ -9,15 +9,141 @@
 <body>
   <div id="app">
     <header class="tf-header">
-      <h1 class="tf-logo">TextFlow</h1>
-      <span class="tf-version">v0.1.0</span>
+      <div class="tf-brand">
+        <span class="tf-logo-mark">◈</span>
+        <h1 class="tf-logo">TextFlow</h1>
+      </div>
+      <span class="tf-version">v0.1</span>
     </header>
-    <main id="tf-content">
-      <div class="tf-placeholder">
-        <p>Em breve — login e dashboard.</p>
+
+    <main id="tf-main">
+      <!-- LOGIN -->
+      <div id="tf-login" class="tf-view">
+        <div class="tf-card">
+          <h2 class="tf-title">Entrar</h2>
+          <p class="tf-subtitle">Acesse seu assistente de texto</p>
+          <form id="tf-login-form">
+            <div class="tf-field">
+              <input type="email" id="tf-login-email" placeholder="Email" autocomplete="email" required>
+            </div>
+            <div class="tf-field">
+              <input type="password" id="tf-login-password" placeholder="Senha" autocomplete="current-password" required>
+            </div>
+            <p id="tf-login-error" class="tf-error-msg tf-hidden"></p>
+            <button type="submit" class="tf-btn tf-btn-primary">Entrar</button>
+          </form>
+          <p class="tf-link">Não tem conta? <button class="tf-link-btn" data-view="register">Criar uma</button></p>
+        </div>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="tf-register" class="tf-view tf-hidden">
+        <div class="tf-card">
+          <h2 class="tf-title">Criar Conta</h2>
+          <p class="tf-subtitle">Comece a usar em segundos</p>
+          <form id="tf-register-form">
+            <div class="tf-field">
+              <input type="text" id="tf-register-name" placeholder="Nome" autocomplete="name">
+            </div>
+            <div class="tf-field">
+              <input type="email" id="tf-register-email" placeholder="Email" autocomplete="email" required>
+            </div>
+            <div class="tf-field">
+              <input type="password" id="tf-register-password" placeholder="Senha (mín. 6 caracteres)" autocomplete="new-password" required minlength="6">
+            </div>
+            <p id="tf-register-error" class="tf-error-msg tf-hidden"></p>
+            <button type="submit" class="tf-btn tf-btn-primary">Criar conta</button>
+          </form>
+          <p class="tf-link">Já tem conta? <button class="tf-link-btn" data-view="login">Entrar</button></p>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div id="tf-dashboard" class="tf-view tf-hidden">
+        <div class="tf-card">
+          <div class="tf-user-row">
+            <div class="tf-avatar" id="tf-dash-avatar"></div>
+            <div>
+              <p class="tf-user-name" id="tf-dash-name">—</p>
+              <p class="tf-user-email" id="tf-dash-email"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tf-card tf-plan-card">
+          <span class="tf-plan-badge" id="tf-dash-plan">Grátis</span>
+          <div class="tf-usage">
+            <div class="tf-usage-header">
+              <span>Usos hoje</span>
+              <span id="tf-dash-usage-label">0/5</span>
+            </div>
+            <div class="tf-usage-bar">
+              <div class="tf-usage-fill" id="tf-dash-usage-fill" style="width: 0%"></div>
+            </div>
+          </div>
+          <button class="tf-btn tf-btn-accent" data-view="upgrade">Fazer Upgrade</button>
+        </div>
+
+        <div class="tf-card tf-menu-card">
+          <button class="tf-menu-item" data-view="settings">
+            <span>⚙</span> Configurações
+          </button>
+          <button class="tf-menu-item" id="tf-logout-btn">
+            <span>↪</span> Sair
+          </button>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="tf-settings" class="tf-view tf-hidden">
+        <div class="tf-card">
+          <div class="tf-back-row">
+            <button class="tf-back-btn" data-view="dashboard">← Voltar</button>
+          </div>
+          <h2 class="tf-title">Configurações</h2>
+          <div class="tf-field">
+            <label class="tf-label">Nome</label>
+            <input type="text" id="tf-settings-name" placeholder="Seu nome">
+          </div>
+          <button class="tf-btn tf-btn-primary" id="tf-settings-save">Salvar</button>
+          <p id="tf-settings-msg" class="tf-success-msg tf-hidden"></p>
+        </div>
+      </div>
+
+      <!-- UPGRADE -->
+      <div id="tf-upgrade" class="tf-view tf-hidden">
+        <div class="tf-card">
+          <div class="tf-back-row">
+            <button class="tf-back-btn" data-view="dashboard">← Voltar</button>
+          </div>
+          <h2 class="tf-title">Planos</h2>
+        </div>
+
+        <div class="tf-card tf-price-card">
+          <h3>Pro</h3>
+          <p class="tf-price">R$ 19<span>/mês</span></p>
+          <ul class="tf-features">
+            <li>✓ Usos ilimitados</li>
+            <li>✓ Todas as ações</li>
+            <li>✓ Histórico salvo</li>
+          </ul>
+          <button class="tf-btn tf-btn-accent">Assinar Pro</button>
+        </div>
+
+        <div class="tf-card tf-price-card tf-price-premium">
+          <h3>Pro+</h3>
+          <p class="tf-price">R$ 39<span>/mês</span></p>
+          <ul class="tf-features">
+            <li>✓ Tudo do Pro</li>
+            <li>✓ WhatsApp Web</li>
+            <li>✓ LinkedIn</li>
+            <li>✓ IA premium</li>
+          </ul>
+          <button class="tf-btn tf-btn-accent">Assinar Pro+</button>
+        </div>
       </div>
     </main>
   </div>
-  <script type="module" src="popup.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>

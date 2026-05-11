@@ -106,16 +106,16 @@
 
 **Objetivo:** Popup com login, dashboard e configurações.
 
-- [ ] `5.1` Estruturar `popup.html` com views: login, register, dashboard, settings, upgrade
-- [ ] `5.2` Implementar `components/login.ts` — formulário de login com validação
-- [ ] `5.3` Implementar `components/register.ts` — formulário de registro
-- [ ] `5.4` Implementar `components/dashboard.ts` — mostra plano atual, usos do dia, botão upgrade
-- [ ] `5.5` Implementar `components/settings.ts` — configurações (idioma, ações favoritas)
-- [ ] `5.6` Implementar `components/upgrade.ts` — cards de preço: Pro (R$19) e Pro+ (R$39)
-- [ ] `5.7` Implementar navegação entre views (login → dashboard → settings → upgrade)
-- [ ] `5.8` Implementar `popup.ts` — app principal, inicialização, roteamento de views
-- [ ] `5.9` Estilizar popup completo (`popup.css`) — design limpo, profissional
-- [ ] `5.10` Testar: abrir popup → login → ver dashboard → navegar entre telas
+- [x] `5.1` Estruturar `popup.html` com views: login, register, dashboard, settings, upgrade
+- [x] `5.2` Implementar `components/login.ts` — formulário de login com validação
+- [x] `5.3` Implementar `components/register.ts` — formulário de registro
+- [x] `5.4` Implementar `components/dashboard.ts` — mostra plano atual, usos do dia, botão upgrade
+- [x] `5.5` Implementar `components/settings.ts` — configurações (idioma, ações favoritas)
+- [x] `5.6` Implementar `components/upgrade.ts` — cards de preço: Pro (R$19) e Pro+ (R$39)
+- [x] `5.7` Implementar navegação entre views (login → dashboard → settings → upgrade)
+- [x] `5.8` Implementar `popup.ts` — app principal, inicialização, roteamento de views
+- [x] `5.9` Estilizar popup completo (`popup.css`) — design limpo, profissional
+- [x] `5.10` Testar: abrir popup → login → ver dashboard → navegar entre telas
 
 ---
 
@@ -194,7 +194,7 @@
 | 2 | Integração AI Multi-Provider | 16 | ✅ Completed |
 | 3 | Extension: Content Script | 11 | ✅ Completed |
 | 4 | Extension: Background + Auth | 11 | ✅ Completed |
-| 5 | Extension: Popup | 10 | ⬜ Pending |
+| 5 | Extension: Popup | 10 | ✅ Completed |
 | 6 | Stripe (Pagamentos) | 9 | ⬜ Pending |
 | 7 | Polimento da Extensão | 10 | ⬜ Pending |
 | 8 | Deploy e Distribuição | 10 | ⬜ Pending |

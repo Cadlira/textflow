@@ -1,4 +1,18 @@
-/* TextFlow — Popup Styles */
+/* ── TextFlow Popup — Dark Editorial ── */
+
+:root {
+  --bg: #0b0b13;
+  --surface: #141426;
+  --surface-hover: #1c1c36;
+  --border: #222240;
+  --text: #d8d8e8;
+  --text-dim: #787894;
+  --accent: #00e5cc;
+  --accent-glow: rgba(0, 229, 204, 0.15);
+  --danger: #ff4d6a;
+  --radius: 10px;
+  --transition: 0.18s ease;
+}
 
 * {
   box-sizing: border-box;
@@ -8,35 +22,351 @@
 
 body {
   width: 360px;
-  min-height: 300px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 14px;
-  color: #1a1a2e;
-  background: #ffffff;
+  min-height: 320px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  letter-spacing: 0.01em;
+  overflow: hidden;
 }
 
+/* ── Header ── */
 .tf-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid #e8e8e8;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.tf-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tf-logo-mark {
+  font-size: 16px;
+  color: var(--accent);
 }
 
 .tf-logo {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--text);
+  letter-spacing: 0.04em;
 }
 
 .tf-version {
-  font-size: 11px;
-  color: #999;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.tf-placeholder {
-  padding: 32px 16px;
-  text-align: center;
-  color: #888;
+/* ── Main ── */
+#tf-main {
+  padding: 12px;
+}
+
+/* ── Cards ── */
+.tf-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  transition: border-color var(--transition);
+}
+
+.tf-card:last-child { margin-bottom: 0; }
+
+/* ── Titles ── */
+.tf-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.tf-subtitle {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+/* ── Fields ── */
+.tf-field {
+  margin-bottom: 10px;
+}
+
+.tf-field:last-of-type { margin-bottom: 14px; }
+
+.tf-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
   font-size: 13px;
+  letter-spacing: 0.01em;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ── Buttons ── */
+.tf-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all var(--transition);
+}
+
+.tf-btn-primary {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.tf-btn-primary:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+.tf-btn-accent {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.tf-btn-accent:hover {
+  background: var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.tf-link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+}
+
+.tf-link-btn:hover { color: #00ffdd; }
+
+.tf-back-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition);
+}
+
+.tf-back-btn:hover { color: var(--text); }
+
+.tf-back-row { margin-bottom: 12px; }
+
+.tf-link {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 14px;
+}
+
+/* ── Error / Success ── */
+.tf-error-msg {
+  color: var(--danger);
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.tf-success-msg {
+  color: var(--accent);
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+/* ── Dashboard ── */
+.tf-user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tf-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.tf-user-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tf-user-email {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* ── Plan Card ── */
+.tf-plan-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--accent-glow);
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.tf-usage { margin-bottom: 14px; }
+
+.tf-usage-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.tf-usage-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.tf-usage-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ── Menu Card ── */
+.tf-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background var(--transition);
+  letter-spacing: 0.01em;
+}
+
+.tf-menu-item:hover {
+  background: var(--surface-hover);
+}
+
+.tf-menu-item:last-child {
+  color: var(--text-dim);
+}
+
+.tf-menu-item:last-child:hover {
+  color: var(--danger);
+}
+
+.tf-menu-item span { font-size: 14px; }
+
+/* ── Price Cards ── */
+.tf-price-card {
+  text-align: center;
+}
+
+.tf-price-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tf-price {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+}
+
+.tf-price span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+}
+
+.tf-features {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.tf-features li {
+  font-size: 12px;
+  color: var(--text-dim);
+  padding: 3px 0;
+  letter-spacing: 0.01em;
+}
+
+.tf-price-premium {
+  border-color: var(--accent);
+}
+
+/* ── Utility ── */
+.tf-hidden { display: none !important; }
+.tf-view { animation: fadeIn 0.2s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
