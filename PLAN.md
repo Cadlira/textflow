@@ -43,25 +43,30 @@
 
 ---
 
-## Fase 2 — Integração OpenRouter
+## Fase 2 — Integração AI Multi-Provider
 
-**Objetivo:** Proxy de AI funcional com prompt engineering e controle de custos.
+**Objetivo:** Proxy de AI funcional com suporte a OpenRouter e DeepSeek direto, prompt engineering e controle de custos.
 
-- [ ] `2.1` Criar `backend/src/lib/ai/openrouter.ts` — cliente OpenAI SDK apontado para OpenRouter
-- [ ] `2.2` Criar `backend/src/lib/ai/prompts.ts` — 5 templates: rewrite, summarize, correct, tone, expand
-- [ ] `2.3` Criar `backend/src/lib/ai/models.ts` — config DeepSeek V4 Flash (primário) + fallback
-- [ ] `2.4` Criar `backend/src/lib/ai/actions.ts` — ações disponíveis e seus metadados
-- [ ] `2.5` Criar `backend/src/lib/ai/types.ts` — AiRequest, AiResponse, Action
-- [ ] `2.6` Implementar `POST /ai/process` — recebe { text, action, tone? }, chama OpenRouter, retorna resultado + tokens usados
-- [ ] `2.7` Adicionar rate limiting específico na rota `/ai/*`: free=5/dia, pro=ilimitado
-- [ ] `2.8` Implementar fallback automático: se Flash falhar → tenta modelo reserva
-- [ ] `2.9` Implementar log de uso: salvar em `usage_logs` + atualizar `daily_usage`
-- [ ] `2.10` Implementar verificação de quota: free tier bloqueia após 5 usos/dia
-- [ ] `2.11` Testar: curl POST /ai/process → verificar resposta + log no banco
+- [ ] `2.1` Criar interface comum de provider: tipo `AiProvider` com método `process()` (`backend/src/lib/ai/provider.ts`)
+- [ ] `2.2` Criar estrutura `backend/src/lib/ai/providers/`
+- [ ] `2.3` Criar cliente OpenRouter (`backend/src/lib/ai/providers/openrouter.ts`) — OpenAI SDK → OpenRouter base URL
+- [ ] `2.4` Criar cliente DeepSeek direto (`backend/src/lib/ai/providers/deepseek.ts`) — OpenAI SDK → DeepSeek base URL
+- [ ] `2.5` Criar factory `getAiProvider()` — seleciona via `AI_PROVIDER` env (openrouter | deepseek | auto)
+- [ ] `2.6` Criar `backend/src/lib/ai/prompts.ts` — 5 templates: rewrite, summarize, correct, tone, expand
+- [ ] `2.7` Criar `backend/src/lib/ai/models.ts` — modelos de ambos providers + fallback cross-provider
+- [ ] `2.8` Criar `backend/src/lib/ai/actions.ts` — ações disponíveis e seus metadados
+- [ ] `2.9` Criar `backend/src/lib/ai/types.ts` — AiRequest, AiResponse, Action
+- [ ] `2.10` Implementar `POST /ai/process` — recebe { text, action, tone? }, usa provider configurado, retorna resultado + tokens
+- [ ] `2.11` Implementar fallback automático entre providers (se `AI_PROVIDER=auto`: tentar primário → fallback para secundário)
+- [ ] `2.12` Adicionar rate limiting específico na rota `/ai/*`: free=5/dia, pro=ilimitado
+- [ ] `2.13` Implementar log de uso: salvar em `usage_logs` + atualizar `daily_usage`
+- [ ] `2.14` Implementar verificação de quota: free tier bloqueia após 5 usos/dia
+- [ ] `2.15` Atualizar `.env.example` com `DEEPSEEK_API_KEY` e `AI_PROVIDER`
+- [ ] `2.16` Testar: curl POST /ai/process com OpenRouter e DeepSeek direto
 
 ---
 
-## Fase 3 — Extension: Content Script (Core UX)
+## Fase 4 — Extension: Content Script (Core UX)
 
 **Objetivo:** Detecção de seleção + UI flutuante funcional.
 
@@ -79,7 +84,7 @@
 
 ---
 
-## Fase 4 — Extension: Background + Auth Flow
+## Fase 5 — Extension: Background + Auth Flow
 
 **Objetivo:** Service worker gerencia autenticação e proxy das chamadas.
 
@@ -97,7 +102,7 @@
 
 ---
 
-## Fase 5 — Extension: Popup (UI Completa)
+## Fase 6 — Extension: Popup (UI Completa)
 
 **Objetivo:** Popup com login, dashboard e configurações.
 
@@ -114,7 +119,7 @@
 
 ---
 
-## Fase 6 — Stripe (Pagamentos)
+## Fase 7 — Stripe (Pagamentos)
 
 **Objetivo:** Cobrança recorrente funcional via Stripe Checkout.
 
@@ -130,7 +135,7 @@
 
 ---
 
-## Fase 7 — Polimento da Extensão
+## Fase 8 — Polimento da Extensão
 
 **Objetivo:** UX refinada, ícones, tratamento de borda.
 
@@ -147,7 +152,7 @@
 
 ---
 
-## Fase 8 — Deploy e Distribuição
+## Fase 9 — Deploy e Distribuição
 
 **Objetivo:** Backend em produção, extensão na Chrome Web Store.
 
@@ -164,7 +169,7 @@
 
 ---
 
-## Fase 9 — Pós-Lançamento (Mês 2-3)
+## Fase 10 — Pós-Lançamento (Mês 2-3)
 
 **Objetivo:** Iterar com feedback, adicionar features premium.
 
@@ -186,15 +191,15 @@
 |:----:|------|:-------:|:------:|
 | 0 | Fundação do Projeto | 12 | ✅ Completed |
 | 1 | Backend Core | 11 | ✅ Completed |
-| 2 | Integração OpenRouter | 11 | ⬜ Pending |
-| 3 | Extension: Content Script | 11 | ⬜ Pending |
-| 4 | Extension: Background + Auth | 11 | ⬜ Pending |
-| 5 | Extension: Popup | 10 | ⬜ Pending |
-| 6 | Stripe (Pagamentos) | 9 | ⬜ Pending |
-| 7 | Polimento da Extensão | 10 | ⬜ Pending |
-| 8 | Deploy e Distribuição | 10 | ⬜ Pending |
-| 9 | Pós-Lançamento | 9 | ⬜ Pending |
-| **Total** | | **104** | |
+| 2 | Integração AI Multi-Provider | 16 | ⬜ Pending |
+| 4 | Extension: Content Script | 11 | ⬜ Pending |
+| 5 | Extension: Background + Auth | 11 | ⬜ Pending |
+| 6 | Extension: Popup | 10 | ⬜ Pending |
+| 7 | Stripe (Pagamentos) | 9 | ⬜ Pending |
+| 8 | Polimento da Extensão | 10 | ⬜ Pending |
+| 9 | Deploy e Distribuição | 10 | ⬜ Pending |
+| 10 | Pós-Lançamento | 9 | ⬜ Pending |
+| **Total** | | **109** | |
 
 ---
 
@@ -210,4 +215,4 @@
 ---
 
 > **Início:** ___/___/2026
-> **Última atualização:** 10/05/2026 — Fase 0 concluída
+> **Última atualização:** 11/05/2026 — Fase 1 concluída, Fase 2 adicionada (multi-provider)
