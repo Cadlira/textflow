@@ -20,7 +20,8 @@
 - [ ] `0.8` Criar `extension/background/background.ts` stub (message listener vazio)
 - [ ] `0.9` Criar `extension/popup/popup.html` + `popup.ts` + `popup.css` stub
 - [ ] `0.10` Criar `.gitignore` (node_modules, .env, *.db, dist/)
-- [ ] `0.11` Testar: `npx tsx src/index.ts` sobe servidor; extensão carrega no Chrome em modo dev
+- [ ] `0.11` Criar `README.md` — descrição do projeto, stack, setup, estrutura, licença
+- [ ] `0.12` Testar: `npx tsx src/index.ts` sobe servidor; extensão carrega no Chrome em modo dev
 
 ---
 
@@ -183,7 +184,7 @@
 
 | Fase | Nome | Tarefas | Status |
 |:----:|------|:-------:|:------:|
-| 0 | Fundação do Projeto | 11 | ⬜ Pending |
+| 0 | Fundação do Projeto | 12 | ⬜ Pending |
 | 1 | Backend Core | 11 | ⬜ Pending |
 | 2 | Integração OpenRouter | 11 | ⬜ Pending |
 | 3 | Extension: Content Script | 11 | ⬜ Pending |
@@ -193,14 +194,14 @@
 | 7 | Polimento da Extensão | 10 | ⬜ Pending |
 | 8 | Deploy e Distribuição | 10 | ⬜ Pending |
 | 9 | Pós-Lançamento | 9 | ⬜ Pending |
-| **Total** | | **103** | |
+| **Total** | | **104** | |
 
 ---
 
 ## Regras de Execução
 
 1. **Uma fase por vez.** Não avance para a próxima fase sem concluir todas as tarefas da atual.
-2. **Checkbox real.** Cada `[x]` só é marcado quando a tarefa está implementada e verificada.
+2. **Checkbox real.** Cada `[x]` só é marcado quando a tarefa está implementada, verificada e commitada.
 3. **Atomicidade.** Cada tarefa deve resultar em pelo menos 1 arquivo modificado/criado.
 4. **Teste manual antes de avançar.** Toda fase tem pelo menos 1 tarefa de teste.
 5. **Commits por fase.** Ao concluir uma fase, commitar com mensagem `feat(phase-N): descrição`.
