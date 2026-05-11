@@ -29,17 +29,17 @@
 
 **Objetivo:** Banco de dados funcional + autenticação JWT completa.
 
-- [ ] `1.1` Configurar Drizzle: `drizzle.config.ts` + conexão SQLite (`backend/src/db/index.ts`)
-- [ ] `1.2` Criar schema inicial: `users` + `usage_logs` + `daily_usage` (`backend/src/db/schema.ts`)
-- [ ] `1.3` Rodar `npx drizzle-kit generate` → primeira migração
-- [ ] `1.4` Implementar `POST /auth/register` — validação Zod, hash bcrypt, insert user
-- [ ] `1.5` Implementar `POST /auth/login` — verifica bcrypt, gera JWT (1h)
-- [ ] `1.6` Implementar middleware `auth.ts` — verifica Bearer token, injeta `c.set('user', payload)`
-- [ ] `1.7` Implementar `GET /user/me` — retorna perfil do usuário autenticado
-- [ ] `1.8` Implementar `PATCH /user/me` — atualiza nome, preferências
-- [ ] `1.9` Implementar middleware `error.ts` — error handler global (não expõe stack trace)
-- [ ] `1.10` Implementar middleware `rate-limit.ts` — rate limiting por userId ou IP
-- [ ] `1.11` Testar: curl register → login → GET /user/me com token
+- [x] `1.1` Configurar Drizzle: `drizzle.config.ts` + conexão SQLite (`backend/src/db/index.ts`)
+- [x] `1.2` Criar schema inicial: `users` + `usage_logs` + `daily_usage` (`backend/src/db/schema.ts`)
+- [x] `1.3` Rodar `npx drizzle-kit generate` → primeira migração
+- [x] `1.4` Implementar `POST /auth/register` — validação Zod, hash bcrypt, insert user
+- [x] `1.5` Implementar `POST /auth/login` — verifica bcrypt, gera JWT (1h)
+- [x] `1.6` Implementar middleware `auth.ts` — verifica Bearer token, injeta `c.set('user', payload)`
+- [x] `1.7` Implementar `GET /user/me` — retorna perfil do usuário autenticado
+- [x] `1.8` Implementar `PATCH /user/me` — atualiza nome, preferências
+- [x] `1.9` Implementar middleware `error.ts` — error handler global (não expõe stack trace)
+- [x] `1.10` Implementar middleware `rate-limit.ts` — rate limiting por userId ou IP
+- [x] `1.11` Testar: curl register → login → GET /user/me com token
 
 ---
 
@@ -185,7 +185,7 @@
 | Fase | Nome | Tarefas | Status |
 |:----:|------|:-------:|:------:|
 | 0 | Fundação do Projeto | 12 | ✅ Completed |
-| 1 | Backend Core | 11 | ⬜ Pending |
+| 1 | Backend Core | 11 | ✅ Completed |
 | 2 | Integração OpenRouter | 11 | ⬜ Pending |
 | 3 | Extension: Content Script | 11 | ⬜ Pending |
 | 4 | Extension: Background + Auth | 11 | ⬜ Pending |

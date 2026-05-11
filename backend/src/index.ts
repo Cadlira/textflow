@@ -1,7 +1,11 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
+import { serve } from '@hono/node-server';
 import 'dotenv/config';
+import { authRoutes } from './routes/auth';
+import { userRoutes } from './routes/user';
+import { errorHandler } from './middleware/error';
 
 const app = new Hono();
 
@@ -12,13 +16,18 @@ app.use('*', cors({
   allowHeaders: ['Content-Type', 'Authorization'],
 }));
 
+app.onError(errorHandler);
+
+app.route('/auth', authRoutes);
+app.route('/user', userRoutes);
+
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
 const port = parseInt(process.env.PORT || '3000');
 
 console.log(`TextFlow backend running at http://localhost:${port}`);
 
-export default {
-  port,
+serve({
   fetch: app.fetch,
-};
+  port,
+});
