@@ -3,21 +3,156 @@
   Prefixo "tf-" para evitar conflitos com a página host.
 */
 
+.tf-container {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 .tf-floating-btn {
   all: initial;
   position: fixed;
   z-index: 2147483647;
   background: #1a1a2e;
   color: #e0e0e0;
+  border: none;
   border-radius: 8px;
   padding: 8px 14px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 13px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.15s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: background 0.15s ease;
+  white-space: nowrap;
 }
 
 .tf-floating-btn:hover {
   background: #16213e;
+}
+
+/* Action Menu */
+.tf-menu {
+  all: initial;
+  position: fixed;
+  z-index: 2147483646;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  padding: 6px;
+  min-width: 160px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.tf-menu-item {
+  all: initial;
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.1s ease;
+  box-sizing: border-box;
+}
+
+.tf-menu-item:hover {
+  background: #f0f0f5;
+}
+
+/* Loading */
+.tf-loading {
+  all: initial;
+  position: fixed;
+  z-index: 2147483647;
+  background: #1a1a2e;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Result Panel */
+.tf-result {
+  all: initial;
+  position: fixed;
+  z-index: 2147483647;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  width: 480px;
+  max-width: 90vw;
+  max-height: 70vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.tf-result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.tf-result-copy {
+  all: initial;
+  margin-left: auto;
+  padding: 4px 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  color: #4a6cf7;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s;
+}
+
+.tf-result-copy:hover {
+  background: #f0f0ff;
+}
+
+.tf-result-close {
+  all: initial;
+  padding: 4px 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s;
+}
+
+.tf-result-close:hover {
+  background: #f0f0f0;
+}
+
+.tf-result-body {
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+/* Error Toast */
+.tf-error {
+  all: initial;
+  position: fixed;
+  z-index: 2147483647;
+  background: #e74c3c;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  text-align: center;
 }

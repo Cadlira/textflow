@@ -70,17 +70,17 @@
 
 **Objetivo:** Detecção de seleção + UI flutuante funcional.
 
-- [ ] `3.1` Implementar `extension/content/content.ts` — listener de `mouseup`, detecta seleção
-- [ ] `3.2` Criar `extension/content/styles/content.css` — estilos com prefixo `tf-`
-- [ ] `3.3` Implementar botão flutuante: aparece ao lado da seleção, posicionamento via `getBoundingClientRect()`
-- [ ] `3.4` Implementar menu dropdown: Reescrever, Resumir, Corrigir, Mudar Tom, Expandir
-- [ ] `3.5` Implementar submenu "Mudar Tom": Formal, Casual, Profissional, Amigável
-- [ ] `3.6` Implementar `extension/content/api.ts` — envia mensagem para background e aguarda resposta
-- [ ] `3.7` Implementar `extension/content/result.ts` — overlay de resultado (substitui texto ou mostra tooltip)
-- [ ] `3.8` Implementar indicador de loading (spinner enquanto aguarda AI)
-- [ ] `3.9` Implementar tratamento de erro: "Limite diário atingido", "Erro ao processar", etc.
-- [ ] `3.10` Implementar cleanup: remove UI ao clicar fora, ao pressionar Escape
-- [ ] `3.11` Testar: carregar extensão → selecionar texto em qualquer site → clicar em Reescrever → ver resultado
+- [x] `3.1` Implementar `extension/content/content.ts` — listener de `mouseup`, detecta seleção
+- [x] `3.2` Criar `extension/content/styles/content.css` — estilos com prefixo `tf-`
+- [x] `3.3` Implementar botão flutuante: aparece ao lado da seleção, posicionamento via `getBoundingClientRect()`
+- [x] `3.4` Implementar menu dropdown: Reescrever, Resumir, Corrigir, Mudar Tom, Expandir
+- [x] `3.5` Implementar submenu "Mudar Tom": Formal, Casual, Profissional, Amigável
+- [x] `3.6` Implementar `extension/content/api.ts` — envia mensagem para background e aguarda resposta
+- [x] `3.7` Implementar `extension/content/result.ts` — overlay de resultado (substitui texto ou mostra tooltip)
+- [x] `3.8` Implementar indicador de loading (spinner enquanto aguarda AI)
+- [x] `3.9` Implementar tratamento de erro: "Limite diário atingido", "Erro ao processar", etc.
+- [x] `3.10` Implementar cleanup: remove UI ao clicar fora, ao pressionar Escape
+- [x] `3.11` Testar: carregar extensão → selecionar texto em qualquer site → clicar em Reescrever → ver resultado
 
 ---
 
@@ -192,7 +192,7 @@
 | 0 | Fundação do Projeto | 12 | ✅ Completed |
 | 1 | Backend Core | 11 | ✅ Completed |
 | 2 | Integração AI Multi-Provider | 16 | ✅ Completed |
-| 3 | Extension: Content Script | 11 | ⬜ Pending |
+| 3 | Extension: Content Script | 11 | ✅ Completed |
 | 4 | Extension: Background + Auth | 11 | ⬜ Pending |
 | 5 | Extension: Popup | 10 | ⬜ Pending |
 | 6 | Stripe (Pagamentos) | 9 | ⬜ Pending |
