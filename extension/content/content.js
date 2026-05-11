@@ -53,9 +53,20 @@
     const btn = document.createElement('button');
     btn.className = 'tf-floating-btn';
     btn.textContent = '✨ TextFlow';
+
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      showMenu(btn);
+      if (e.shiftKey) {
+        chrome.storage.local.get('lastTone', (result) => {
+          if (result.lastTone) {
+            processText('tone', result.lastTone);
+          } else {
+            showMenu(btn);
+          }
+        });
+      } else {
+        showMenu(btn);
+      }
     });
 
     floatingContainer.appendChild(btn);
@@ -67,6 +78,22 @@
 
     btn.style.top = top + 'px';
     btn.style.left = left + 'px';
+
+    // Fade-in animation
+    btn.style.opacity = '0';
+    requestAnimationFrame(() => { btn.style.opacity = '1'; });
+
+    // Load quota display
+    chrome.storage.local.get('auth', (result) => {
+      const auth = result.auth || {};
+      if (auth.plan === 'free') {
+        const remaining = Math.max(0, 5 - (auth.usageToday || 0));
+        btn.textContent = remaining > 0 ? '✨ TextFlow (' + remaining + '/5)' : '⛔ TextFlow (0/5)';
+        if (remaining === 0) {
+          btn.title = 'Limite diário atingido. Assine o Pro para uso ilimitado.';
+        }
+      }
+    });
   }
 
   // --- Action Menu ---
@@ -129,6 +156,11 @@
   // --- Process Text ---
   async function processText(action, tone) {
     showLoading();
+
+    // Store last tone for shift+click
+    if (action === 'tone' && tone) {
+      chrome.storage.local.set({ lastTone: tone });
+    }
 
     try {
       const response = await chrome.runtime.sendMessage({
@@ -251,6 +283,24 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       removeUI();
+    }
+  });
+
+  // --- Keyboard Shortcut Listener (from background) ---
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.type === 'OPEN_MENU') {
+      const selection = window.getSelection();
+      if (selection && selection.toString().trim().length >= 2) {
+        activeText = selection.toString().trim();
+        const rect = selection.getRangeAt(0).getBoundingClientRect();
+        showFloatingButton(rect);
+        setTimeout(() => {
+          const btn = floatingContainer?.querySelector('.tf-floating-btn');
+          if (btn) showMenu(btn);
+        }, 200);
+      } else {
+        showError('Selecione um texto para usar o TextFlow');
+      }
     }
   });
 })();

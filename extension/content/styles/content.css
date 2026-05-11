@@ -21,7 +21,7 @@
   font-size: 13px;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, opacity 0.15s ease;
   white-space: nowrap;
 }
 
@@ -40,6 +40,8 @@
   padding: 6px;
   min-width: 160px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: opacity 0.1s ease, transform 0.1s ease;
+  transform: translateY(-4px);
 }
 
 .tf-menu-item {
@@ -87,6 +89,7 @@
   max-height: 70vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .tf-result-header {
@@ -155,4 +158,10 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   max-width: 400px;
   text-align: center;
+  transition: opacity 0.15s ease;
+}
+
+/* Quota Badge */
+.tf-floating-btn[title] {
+  cursor: help;
 }

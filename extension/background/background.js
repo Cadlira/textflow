@@ -51,7 +51,21 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       return true;
 
     default:
-      sendResponse({ error: 'Unknown message type: ' + message.type });
+      sendResponse({ error: 'Tipo de mensagem desconhecido: ' + message.type });
+  }
+});
+
+// --- Keyboard Shortcuts ---
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === 'open-textflow') {
+    try {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab?.id) {
+        chrome.tabs.sendMessage(tab.id, { type: 'OPEN_MENU' });
+      }
+    } catch (err) {
+      console.error('[TextFlow] Shortcut error:', err);
+    }
   }
 });
 
@@ -81,7 +95,7 @@ async function handleLogin(payload) {
     }
     return data;
   } catch (err) {
-    return { error: 'Connection failed' };
+    return { error: 'Erro de conexão' };
   }
 }
 
@@ -105,7 +119,7 @@ async function handleRegister(payload) {
     }
     return data;
   } catch (err) {
-    return { error: 'Connection failed' };
+    return { error: 'Erro de conexão' };
   }
 }
 
@@ -141,7 +155,7 @@ async function handleProcessText(payload) {
 // --- Profile ---
 async function handleUpdateProfile(payload) {
   const auth = await getAuthState();
-  if (!auth.token) return { error: 'Not authenticated' };
+  if (!auth.token) return { error: 'Não autenticado' };
 
   try {
     const res = await fetch(API_BASE + '/user/me', {
@@ -159,14 +173,14 @@ async function handleUpdateProfile(payload) {
     }
     return data;
   } catch (err) {
-    return { error: 'Connection failed' };
+    return { error: 'Erro de conexão' };
   }
 }
 
 // --- Stripe ---
 async function handleStripeCheckout(payload) {
   const auth = await getAuthState();
-  if (!auth.token) return { error: 'Not authenticated' };
+  if (!auth.token) return { error: 'Não autenticado' };
 
   try {
     const res = await fetch(API_BASE + '/stripe/checkout', {
@@ -179,13 +193,13 @@ async function handleStripeCheckout(payload) {
     });
     return await res.json();
   } catch (err) {
-    return { error: 'Connection failed' };
+    return { error: 'Erro de conexão' };
   }
 }
 
 async function handleStripePortal() {
   const auth = await getAuthState();
-  if (!auth.token) return { error: 'Not authenticated' };
+  if (!auth.token) return { error: 'Não autenticado' };
 
   try {
     const res = await fetch(API_BASE + '/stripe/portal', {
@@ -197,6 +211,6 @@ async function handleStripePortal() {
     });
     return await res.json();
   } catch (err) {
-    return { error: 'Connection failed' };
+    return { error: 'Erro de conexão' };
   }
 }
