@@ -47,22 +47,22 @@
 
 **Objetivo:** Proxy de AI funcional com suporte a OpenRouter e DeepSeek direto, prompt engineering e controle de custos.
 
-- [ ] `2.1` Criar interface comum de provider: tipo `AiProvider` com método `process()` (`backend/src/lib/ai/provider.ts`)
-- [ ] `2.2` Criar estrutura `backend/src/lib/ai/providers/`
-- [ ] `2.3` Criar cliente OpenRouter (`backend/src/lib/ai/providers/openrouter.ts`) — OpenAI SDK → OpenRouter base URL
-- [ ] `2.4` Criar cliente DeepSeek direto (`backend/src/lib/ai/providers/deepseek.ts`) — OpenAI SDK → DeepSeek base URL
-- [ ] `2.5` Criar factory `getAiProvider()` — seleciona via `AI_PROVIDER` env (openrouter | deepseek | auto)
-- [ ] `2.6` Criar `backend/src/lib/ai/prompts.ts` — 5 templates: rewrite, summarize, correct, tone, expand
-- [ ] `2.7` Criar `backend/src/lib/ai/models.ts` — modelos de ambos providers + fallback cross-provider
-- [ ] `2.8` Criar `backend/src/lib/ai/actions.ts` — ações disponíveis e seus metadados
-- [ ] `2.9` Criar `backend/src/lib/ai/types.ts` — AiRequest, AiResponse, Action
-- [ ] `2.10` Implementar `POST /ai/process` — recebe { text, action, tone? }, usa provider configurado, retorna resultado + tokens
-- [ ] `2.11` Implementar fallback automático entre providers (se `AI_PROVIDER=auto`: tentar primário → fallback para secundário)
-- [ ] `2.12` Adicionar rate limiting específico na rota `/ai/*`: free=5/dia, pro=ilimitado
-- [ ] `2.13` Implementar log de uso: salvar em `usage_logs` + atualizar `daily_usage`
-- [ ] `2.14` Implementar verificação de quota: free tier bloqueia após 5 usos/dia
-- [ ] `2.15` Atualizar `.env.example` com `DEEPSEEK_API_KEY` e `AI_PROVIDER`
-- [ ] `2.16` Testar: curl POST /ai/process com OpenRouter e DeepSeek direto
+- [x] `2.1` Criar interface comum de provider: tipo `AiProvider` com método `process()` (`backend/src/lib/ai/provider.ts`)
+- [x] `2.2` Criar estrutura `backend/src/lib/ai/providers/`
+- [x] `2.3` Criar cliente OpenRouter (`backend/src/lib/ai/providers/openrouter.ts`) — OpenAI SDK → OpenRouter base URL
+- [x] `2.4` Criar cliente DeepSeek direto (`backend/src/lib/ai/providers/deepseek.ts`) — OpenAI SDK → DeepSeek base URL
+- [x] `2.5` Criar factory `getAiProvider()` — seleciona via `AI_PROVIDER` env (openrouter | deepseek | auto)
+- [x] `2.6` Criar `backend/src/lib/ai/prompts.ts` — 5 templates: rewrite, summarize, correct, tone, expand
+- [x] `2.7` Criar `backend/src/lib/ai/models.ts` — modelos de ambos providers + fallback cross-provider
+- [x] `2.8` Criar `backend/src/lib/ai/actions.ts` — ações disponíveis e seus metadados
+- [x] `2.9` Criar `backend/src/lib/ai/types.ts` — AiRequest, AiResponse, Action
+- [x] `2.10` Implementar `POST /ai/process` — recebe { text, action, tone? }, usa provider configurado, retorna resultado + tokens
+- [x] `2.11` Implementar fallback automático entre providers (se `AI_PROVIDER=auto`: tentar primário → fallback para secundário)
+- [x] `2.12` Adicionar rate limiting específico na rota `/ai/*`: free=5/dia, pro=ilimitado
+- [x] `2.13` Implementar log de uso: salvar em `usage_logs` + atualizar `daily_usage`
+- [x] `2.14` Implementar verificação de quota: free tier bloqueia após 5 usos/dia
+- [x] `2.15` Atualizar `.env.example` com `DEEPSEEK_API_KEY` e `AI_PROVIDER`
+- [x] `2.16` Testar: curl POST /ai/process com OpenRouter e DeepSeek direto
 
 ---
 
@@ -191,7 +191,7 @@
 |:----:|------|:-------:|:------:|
 | 0 | Fundação do Projeto | 12 | ✅ Completed |
 | 1 | Backend Core | 11 | ✅ Completed |
-| 2 | Integração AI Multi-Provider | 16 | ⬜ Pending |
+| 2 | Integração AI Multi-Provider | 16 | ✅ Completed |
 | 4 | Extension: Content Script | 11 | ⬜ Pending |
 | 5 | Extension: Background + Auth | 11 | ⬜ Pending |
 | 6 | Extension: Popup | 10 | ⬜ Pending |

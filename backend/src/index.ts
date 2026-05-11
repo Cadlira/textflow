@@ -5,6 +5,7 @@ import { serve } from '@hono/node-server';
 import 'dotenv/config';
 import { authRoutes } from './routes/auth';
 import { userRoutes } from './routes/user';
+import { aiRoutes } from './routes/ai';
 import { errorHandler } from './middleware/error';
 
 const app = new Hono();
@@ -20,6 +21,7 @@ app.onError(errorHandler);
 
 app.route('/auth', authRoutes);
 app.route('/user', userRoutes);
+app.route('/ai', aiRoutes);
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
