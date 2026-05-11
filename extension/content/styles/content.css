@@ -1,0 +1,23 @@
+/*
+  TextFlow — Content Script Styles
+  Prefixo "tf-" para evitar conflitos com a página host.
+*/
+
+.tf-floating-btn {
+  all: initial;
+  position: fixed;
+  z-index: 2147483647;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.15s ease;
+}
+
+.tf-floating-btn:hover {
+  background: #16213e;
+}

@@ -10,18 +10,18 @@
 
 **Objetivo:** Estruturar diretórios, configurar tooling e garantir que tudo compila.
 
-- [ ] `0.1` Criar estrutura de diretórios (`extension/` + `backend/`)
-- [ ] `0.2` Inicializar `backend/package.json` com dependências (Hono, Drizzle, OpenAI SDK, JWT, bcrypt, Stripe, Zod)
-- [ ] `0.3` Criar `backend/tsconfig.json` (strict, ES2022, ESM)
-- [ ] `0.4` Criar `backend/.env.example` com todas as variáveis documentadas
-- [ ] `0.5` Criar `backend/src/index.ts` — servidor Hono mínimo com health check
-- [ ] `0.6` Criar `extension/manifest.json` (Manifest V3, permissões, content_scripts, service_worker, popup)
-- [ ] `0.7` Criar `extension/content/content.ts` stub (detecta seleção, exibe botão "em breve")
-- [ ] `0.8` Criar `extension/background/background.ts` stub (message listener vazio)
-- [ ] `0.9` Criar `extension/popup/popup.html` + `popup.ts` + `popup.css` stub
-- [ ] `0.10` Criar `.gitignore` (node_modules, .env, *.db, dist/)
-- [ ] `0.11` Criar `README.md` — descrição do projeto, stack, setup, estrutura, licença
-- [ ] `0.12` Testar: `npx tsx src/index.ts` sobe servidor; extensão carrega no Chrome em modo dev
+- [x] `0.1` Criar estrutura de diretórios (`extension/` + `backend/`)
+- [x] `0.2` Inicializar `backend/package.json` com dependências (Hono, Drizzle, OpenAI SDK, JWT, bcrypt, Stripe, Zod)
+- [x] `0.3` Criar `backend/tsconfig.json` (strict, ES2022, ESM)
+- [x] `0.4` Criar `backend/.env.example` com todas as variáveis documentadas
+- [x] `0.5` Criar `backend/src/index.ts` — servidor Hono mínimo com health check
+- [x] `0.6` Criar `extension/manifest.json` (Manifest V3, permissões, content_scripts, service_worker, popup)
+- [x] `0.7` Criar `extension/content/content.ts` stub (detecta seleção, exibe botão "em breve")
+- [x] `0.8` Criar `extension/background/background.ts` stub (message listener vazio)
+- [x] `0.9` Criar `extension/popup/popup.html` + `popup.ts` + `popup.css` stub
+- [x] `0.10` Criar `.gitignore` (node_modules, .env, *.db, dist/)
+- [x] `0.11` Criar `README.md` — descrição do projeto, stack, setup, estrutura, licença
+- [x] `0.12` Testar: `npx tsx src/index.ts` sobe servidor; extensão carrega no Chrome em modo dev
 
 ---
 
@@ -184,7 +184,7 @@
 
 | Fase | Nome | Tarefas | Status |
 |:----:|------|:-------:|:------:|
-| 0 | Fundação do Projeto | 12 | ⬜ Pending |
+| 0 | Fundação do Projeto | 12 | ✅ Completed |
 | 1 | Backend Core | 11 | ⬜ Pending |
 | 2 | Integração OpenRouter | 11 | ⬜ Pending |
 | 3 | Extension: Content Script | 11 | ⬜ Pending |
@@ -210,4 +210,4 @@
 ---
 
 > **Início:** ___/___/2026
-> **Última atualização:** 10/05/2026
+> **Última atualização:** 10/05/2026 — Fase 0 concluída
