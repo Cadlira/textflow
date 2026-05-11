@@ -66,7 +66,7 @@
 
 ---
 
-## Fase 4 — Extension: Content Script (Core UX)
+## Fase 3 — Extension: Content Script (Core UX)
 
 **Objetivo:** Detecção de seleção + UI flutuante funcional.
 
@@ -84,7 +84,7 @@
 
 ---
 
-## Fase 5 — Extension: Background + Auth Flow
+## Fase 4 — Extension: Background + Auth Flow
 
 **Objetivo:** Service worker gerencia autenticação e proxy das chamadas.
 
@@ -102,7 +102,7 @@
 
 ---
 
-## Fase 6 — Extension: Popup (UI Completa)
+## Fase 5 — Extension: Popup (UI Completa)
 
 **Objetivo:** Popup com login, dashboard e configurações.
 
@@ -119,7 +119,7 @@
 
 ---
 
-## Fase 7 — Stripe (Pagamentos)
+## Fase 6 — Stripe (Pagamentos)
 
 **Objetivo:** Cobrança recorrente funcional via Stripe Checkout.
 
@@ -135,7 +135,7 @@
 
 ---
 
-## Fase 8 — Polimento da Extensão
+## Fase 7 — Polimento da Extensão
 
 **Objetivo:** UX refinada, ícones, tratamento de borda.
 
@@ -152,7 +152,7 @@
 
 ---
 
-## Fase 9 — Deploy e Distribuição
+## Fase 8 — Deploy e Distribuição
 
 **Objetivo:** Backend em produção, extensão na Chrome Web Store.
 
@@ -169,7 +169,7 @@
 
 ---
 
-## Fase 10 — Pós-Lançamento (Mês 2-3)
+## Fase 9 — Pós-Lançamento (Mês 2-3)
 
 **Objetivo:** Iterar com feedback, adicionar features premium.
 
@@ -192,13 +192,13 @@
 | 0 | Fundação do Projeto | 12 | ✅ Completed |
 | 1 | Backend Core | 11 | ✅ Completed |
 | 2 | Integração AI Multi-Provider | 16 | ✅ Completed |
-| 4 | Extension: Content Script | 11 | ⬜ Pending |
-| 5 | Extension: Background + Auth | 11 | ⬜ Pending |
-| 6 | Extension: Popup | 10 | ⬜ Pending |
-| 7 | Stripe (Pagamentos) | 9 | ⬜ Pending |
-| 8 | Polimento da Extensão | 10 | ⬜ Pending |
-| 9 | Deploy e Distribuição | 10 | ⬜ Pending |
-| 10 | Pós-Lançamento | 9 | ⬜ Pending |
+| 3 | Extension: Content Script | 11 | ⬜ Pending |
+| 4 | Extension: Background + Auth | 11 | ⬜ Pending |
+| 5 | Extension: Popup | 10 | ⬜ Pending |
+| 6 | Stripe (Pagamentos) | 9 | ⬜ Pending |
+| 7 | Polimento da Extensão | 10 | ⬜ Pending |
+| 8 | Deploy e Distribuição | 10 | ⬜ Pending |
+| 9 | Pós-Lançamento | 9 | ⬜ Pending |
 | **Total** | | **109** | |
 
 ---
