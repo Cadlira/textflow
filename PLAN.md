@@ -123,15 +123,15 @@
 
 **Objetivo:** Cobrança recorrente funcional via Stripe Checkout.
 
-- [ ] `6.1` Criar `backend/src/lib/stripe.ts` — cliente Stripe com secret key
-- [ ] `6.2` Criar produtos/planos no Stripe Dashboard: Pro (R$19/mês) e Pro+ (R$39/mês)
-- [ ] `6.3` Implementar `POST /stripe/checkout` — cria Checkout Session, retorna URL
-- [ ] `6.4` Implementar `POST /stripe/webhook` — processa `checkout.session.completed`, atualiza plano do user
-- [ ] `6.5` Implementar `POST /stripe/webhook` — processa `customer.subscription.deleted`, downgrade para free
-- [ ] `6.6` Implementar `POST /stripe/portal` — cria Customer Portal Session para gerenciar assinatura
-- [ ] `6.7` Atualizar popup: botão "Assinar Pro" → abre Stripe Checkout
-- [ ] `6.8` Atualizar popup: botão "Gerenciar Assinatura" → abre Stripe Customer Portal
-- [ ] `6.9` Testar: fluxo completo de assinatura (modo teste Stripe)
+- [x] `6.1` Criar `backend/src/lib/stripe.ts` — cliente Stripe com secret key
+- [x] `6.2` Criar produtos/planos no Stripe Dashboard: Pro (R$19/mês) e Pro+ (R$39/mês)
+- [x] `6.3` Implementar `POST /stripe/checkout` — cria Checkout Session, retorna URL
+- [x] `6.4` Implementar `POST /stripe/webhook` — processa `checkout.session.completed`, atualiza plano do user
+- [x] `6.5` Implementar `POST /stripe/webhook` — processa `customer.subscription.deleted`, downgrade para free
+- [x] `6.6` Implementar `POST /stripe/portal` — cria Customer Portal Session para gerenciar assinatura
+- [x] `6.7` Atualizar popup: botão "Assinar Pro" → abre Stripe Checkout
+- [x] `6.8` Atualizar popup: botão "Gerenciar Assinatura" → abre Stripe Customer Portal
+- [x] `6.9` Testar: fluxo completo de assinatura (modo teste Stripe)
 
 ---
 
@@ -195,7 +195,7 @@
 | 3 | Extension: Content Script | 11 | ✅ Completed |
 | 4 | Extension: Background + Auth | 11 | ✅ Completed |
 | 5 | Extension: Popup | 10 | ✅ Completed |
-| 6 | Stripe (Pagamentos) | 9 | ⬜ Pending |
+| 6 | Stripe (Pagamentos) | 9 | ✅ Completed |
 | 7 | Polimento da Extensão | 10 | ⬜ Pending |
 | 8 | Deploy e Distribuição | 10 | ⬜ Pending |
 | 9 | Pós-Lançamento | 9 | ⬜ Pending |

@@ -42,6 +42,14 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       handleUpdateProfile(message.payload).then(sendResponse);
       return true;
 
+    case 'STRIPE_CHECKOUT':
+      handleStripeCheckout(message.payload).then(sendResponse);
+      return true;
+
+    case 'STRIPE_PORTAL':
+      handleStripePortal().then(sendResponse);
+      return true;
+
     default:
       sendResponse({ error: 'Unknown message type: ' + message.type });
   }
@@ -150,6 +158,44 @@ async function handleUpdateProfile(payload) {
       await chrome.storage.local.set({ auth });
     }
     return data;
+  } catch (err) {
+    return { error: 'Connection failed' };
+  }
+}
+
+// --- Stripe ---
+async function handleStripeCheckout(payload) {
+  const auth = await getAuthState();
+  if (!auth.token) return { error: 'Not authenticated' };
+
+  try {
+    const res = await fetch(API_BASE + '/stripe/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + auth.token,
+      },
+      body: JSON.stringify({ plan: payload.plan }),
+    });
+    return await res.json();
+  } catch (err) {
+    return { error: 'Connection failed' };
+  }
+}
+
+async function handleStripePortal() {
+  const auth = await getAuthState();
+  if (!auth.token) return { error: 'Not authenticated' };
+
+  try {
+    const res = await fetch(API_BASE + '/stripe/portal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + auth.token,
+      },
+    });
+    return await res.json();
   } catch (err) {
     return { error: 'Connection failed' };
   }

@@ -24,6 +24,9 @@
     document.getElementById('tf-register-form').addEventListener('submit', handleRegister);
     document.getElementById('tf-logout-btn').addEventListener('click', handleLogout);
     document.getElementById('tf-settings-save').addEventListener('click', handleSaveSettings);
+    document.getElementById('tf-checkout-pro').addEventListener('click', () => handleCheckout('pro'));
+    document.getElementById('tf-checkout-pro-plus').addEventListener('click', () => handleCheckout('pro_plus'));
+    document.getElementById('tf-manage-sub').addEventListener('click', handleManageSubscription);
   }
 
   function showView(name) {
@@ -143,6 +146,14 @@
     const planLabels = { free: 'Grátis', pro: 'Pro', pro_plus: 'Pro+' };
     document.getElementById('tf-dash-plan').textContent = planLabels[auth.plan] || 'Grátis';
 
+    // Show/hide manage subscription button
+    const manageBtn = document.getElementById('tf-manage-sub');
+    if (auth.plan !== 'free') {
+      manageBtn.classList.remove('tf-hidden');
+    } else {
+      manageBtn.classList.add('tf-hidden');
+    }
+
     const usage = auth.usageToday || 0;
     const max = auth.plan === 'free' ? 5 : Infinity;
     const pct = max === Infinity ? 0 : Math.min((usage / max) * 100, 100);
@@ -180,6 +191,38 @@
     } catch (err) {
       msgEl.textContent = 'Erro ao salvar.';
       msgEl.classList.remove('tf-hidden');
+    }
+  }
+
+  // ── Stripe ──
+  async function handleCheckout(plan) {
+    try {
+      const res = await chrome.runtime.sendMessage({
+        type: 'STRIPE_CHECKOUT',
+        payload: { plan },
+      });
+      if (res.url) {
+        window.open(res.url, '_blank');
+      } else if (res.error) {
+        alert(res.error);
+      }
+    } catch (err) {
+      alert('Erro ao conectar ao Stripe.');
+    }
+  }
+
+  async function handleManageSubscription() {
+    try {
+      const res = await chrome.runtime.sendMessage({
+        type: 'STRIPE_PORTAL',
+      });
+      if (res.url) {
+        window.open(res.url, '_blank');
+      } else if (res.error) {
+        alert(res.error);
+      }
+    } catch (err) {
+      alert('Erro ao abrir portal.');
     }
   }
 })();
