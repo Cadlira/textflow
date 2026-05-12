@@ -382,7 +382,7 @@ const HTML = `<!DOCTYPE html>
       <div class="tf-price-card tf-price-featured">
         <span class="tf-price-badge">Popular</span>
         <h3>Pro</h3>
-        <p class="tf-price-amount">R$19</p>
+        <p class="tf-price-amount">R$9,90</p>
         <p class="tf-price-period">por m\u00eas</p>
         <ul class="tf-price-features">
           <li>Uso ilimitado</li>
@@ -395,7 +395,7 @@ const HTML = `<!DOCTYPE html>
 
       <div class="tf-price-card">
         <h3>Pro+</h3>
-        <p class="tf-price-amount">R$39</p>
+        <p class="tf-price-amount">R$19,90</p>
         <p class="tf-price-period">por m\u00eas</p>
         <ul class="tf-price-features">
           <li>Tudo do plano Pro</li>

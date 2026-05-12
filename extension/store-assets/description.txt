@@ -18,8 +18,8 @@ COMO FUNCIONA
 
 PLANOS
 • Grátis — 5 utilizações por dia, acesso a todas as ações
-• Pro — R$19/mês, utilizações ilimitadas, modelos de IA otimizados
-• Pro+ — R$39/mês, ilimitado + acesso a modelos avançados, histórico completo e suporte prioritário
+• Pro — R$9,90/mês, utilizações ilimitadas, modelos de IA otimizados
+• Pro+ — R$19,90/mês, ilimitado + acesso a modelos avançados, histórico completo e suporte prioritário
 
 PRIVACIDADE E SEGURANÇA
 Seu texto é processado exclusivamente via nossa API própria. Nenhum dado textual é vendido, compartilhado com terceiros ou armazenado em nossos servidores após o processamento. Não coletamos dados de navegação. Sua privacidade é absoluta.

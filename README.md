@@ -57,8 +57,8 @@ npm run dev            # http://localhost:3000
 | Plano | Preço | Limite |
 |-------|:-----:|--------|
 | Grátis | R$ 0 | 5 usos/dia |
-| Pro | R$ 19/mês | Ilimitado |
-| Pro+ | R$ 39/mês | Ilimitado + WhatsApp + LinkedIn |
+| Pro | R$ 9,90/mês | Ilimitado |
+| Pro+ | R$ 19,90/mês | Ilimitado + WhatsApp + LinkedIn |
 
 ## Deploy
 
