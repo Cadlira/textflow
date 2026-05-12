@@ -12,7 +12,7 @@ vi.mock('openai', () => {
     usage: { prompt_tokens: 10, completion_tokens: 20, total_tokens: 30 },
   });
 
-  function MockOpenAI() {
+  function MockOpenAI(this: any) {
     this.chat = { completions: { create: mockCreate } };
   }
 
