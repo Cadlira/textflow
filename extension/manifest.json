@@ -8,6 +8,7 @@
   ],
   "host_permissions": [
     "http://localhost:3000/*",
+    "https://textflow-backend-production.up.railway.app/*",
     "https://textflow.online/*",
     "https://api.textflow.online/*"
   ],

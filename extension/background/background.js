@@ -1,7 +1,7 @@
 // TextFlow — Service Worker
 // Gerencia autenticação e proxy para o backend
 
-const API_BASE = 'https://textflow.online';
+const API_BASE = 'https://textflow-backend-production.up.railway.app';
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('[TextFlow] Extension installed');
