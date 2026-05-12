@@ -23,9 +23,6 @@ COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/drizzle ./drizzle
 
 RUN mkdir -p data
-RUN chown -R node:node /app
-
-USER node
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
