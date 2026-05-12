@@ -16,7 +16,7 @@ export class OpenRouterProvider implements AiProvider {
         'HTTP-Referer': 'https://textflow.online',
         'X-Title': 'TextFlow',
       },
-      timeout: 15000,
+      timeout: 60000,
     });
   }
 
