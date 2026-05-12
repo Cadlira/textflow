@@ -36,3 +36,4 @@ coverage/
 
 # Chrome Web Store generated assets (regenerable via scripts/generate-store-assets.js)
 extension/store-assets/*.png
+render.yaml
