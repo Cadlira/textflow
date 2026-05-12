@@ -72,12 +72,22 @@
     floatingContainer.appendChild(btn);
     document.body.appendChild(floatingContainer);
 
-    // Position near selection
-    const top = rect.bottom + window.scrollY + 6;
-    const left = Math.min(rect.left + window.scrollX, window.innerWidth - 160);
+    // Position near selection (viewport-relative — both button and menu use position:fixed)
+    let btnTop = rect.bottom + 6;
+    const btnHeight = 34; // approximate
+    const menuHeight = 240; // approximate max menu height
 
-    btn.style.top = top + 'px';
-    btn.style.left = left + 'px';
+    // If button would go below viewport, show above selection instead
+    if (btnTop + btnHeight + menuHeight > window.innerHeight) {
+      btnTop = rect.top - btnHeight - 6;
+    }
+    // Clamp to visible area
+    btnTop = Math.max(4, Math.min(btnTop, window.innerHeight - btnHeight - 4));
+
+    const btnLeft = Math.max(4, Math.min(rect.left, window.innerWidth - 164));
+
+    btn.style.top = btnTop + 'px';
+    btn.style.left = btnLeft + 'px';
 
     // Fade-in animation
     btn.style.opacity = '0';
@@ -123,10 +133,15 @@
 
     floatingContainer.appendChild(menu);
 
-    // Position below button
+    // Position below or above button
     const btnRect = anchorBtn.getBoundingClientRect();
-    menu.style.top = (btnRect.bottom + 4) + 'px';
-    menu.style.left = btnRect.left + 'px';
+    let menuTop = btnRect.bottom + 4;
+    if (menuTop + 250 > window.innerHeight) {
+      menuTop = btnRect.top - 250;
+    }
+    const menuLeft = Math.max(4, Math.min(btnRect.left, window.innerWidth - 170));
+    menu.style.top = menuTop + 'px';
+    menu.style.left = menuLeft + 'px';
   }
 
   // --- Tone Submenu ---
