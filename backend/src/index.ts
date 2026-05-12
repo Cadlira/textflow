@@ -7,6 +7,7 @@ import { authRoutes } from './routes/auth';
 import { userRoutes } from './routes/user';
 import { aiRoutes } from './routes/ai';
 import { stripeRoutes } from './routes/stripe';
+import { metricsRoutes } from './routes/metrics';
 import { landingRoute } from './routes/landing';
 import { errorHandler } from './middleware/error';
 import { loggerMiddleware } from './middleware/logger';
@@ -38,6 +39,7 @@ app.route('/auth', authRoutes);
 app.route('/user', userRoutes);
 app.route('/ai', aiRoutes);
 app.route('/stripe', stripeRoutes);
+app.route('/', metricsRoutes);
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
