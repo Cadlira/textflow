@@ -75,28 +75,40 @@
     const btn = document.createElement('button');
     btn.className = 'tf-floating-btn';
 
-    // Load quota display
-    chrome.storage.local.get('auth', (result) => {
-      const auth = result.auth || {};
-      if (auth.plan === 'free') {
-        const remaining = Math.max(0, 5 - (auth.usageToday || 0));
-        btn.textContent = remaining > 0 ? '✨ TextFlow (' + remaining + '/5)' : '⛔ TextFlow (0/5)';
-        if (remaining === 0) btn.title = 'Limite diário atingido. Assine o Pro para uso ilimitado.';
+    // Load quota display (safe wrapper for extension context invalidation)
+    try {
+      if (chrome.runtime?.id) {
+        chrome.storage.local.get('auth', (result) => {
+          if (chrome.runtime.lastError) return;
+          const auth = result.auth || {};
+          if (auth.plan === 'free') {
+            const remaining = Math.max(0, 5 - (auth.usageToday || 0));
+            btn.textContent = remaining > 0 ? '✨ TextFlow (' + remaining + '/5)' : '⛔ TextFlow (0/5)';
+            if (remaining === 0) btn.title = 'Limite diário atingido. Assine o Pro para uso ilimitado.';
+          }
+        });
       }
-    });
+    } catch (_) { /* extension context invalidated */ }
     if (!btn.textContent) btn.textContent = '✨ TextFlow';
 
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       e.preventDefault();
       if (e.shiftKey) {
-        chrome.storage.local.get('lastTone', (result) => {
-          if (result.lastTone) {
-            processText('tone', result.lastTone);
+        try {
+          if (chrome.runtime?.id) {
+            chrome.storage.local.get('lastTone', (result) => {
+              if (chrome.runtime.lastError) { showMenu(btn); return; }
+              if (result.lastTone) {
+                processText('tone', result.lastTone);
+              } else {
+                showMenu(btn);
+              }
+            });
           } else {
             showMenu(btn);
           }
-        });
+        } catch (_) { showMenu(btn); }
       } else {
         showMenu(btn);
       }
@@ -233,12 +245,12 @@
   async function processText(action, tone) {
     showLoading();
 
-    // Store last tone for shift+click
-    if (action === 'tone' && tone) {
-      chrome.storage.local.set({ lastTone: tone });
-    }
-
     try {
+      // Store last tone for shift+click
+      if (action === 'tone' && tone && chrome.runtime?.id) {
+        chrome.storage.local.set({ lastTone: tone });
+      }
+
       const response = await chrome.runtime.sendMessage({
         type: 'PROCESS_TEXT',
         payload: { text: activeText, action, tone },
