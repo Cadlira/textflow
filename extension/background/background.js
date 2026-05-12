@@ -84,12 +84,13 @@ async function handleLogin(payload) {
     });
     const data = await res.json();
     if (data.token) {
+      const current = await getAuthState();
       await chrome.storage.local.set({
         auth: {
           token: data.token,
           userId: data.user.id,
           plan: data.user.plan,
-          usageToday: 0,
+          usageToday: current.usageToday || 0,
         },
       });
     }
@@ -146,7 +147,15 @@ async function handleProcessText(payload) {
       },
       body: JSON.stringify(payload),
     });
-    return await res.json();
+    const data = await res.json();
+
+    // Increment usage counter on success
+    if (!data.error && auth.plan === 'free') {
+      auth.usageToday = (auth.usageToday || 0) + 1;
+      await chrome.storage.local.set({ auth });
+    }
+
+    return data;
   } catch (err) {
     return { error: 'Não foi possível conectar ao servidor.' };
   }
