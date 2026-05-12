@@ -23,8 +23,19 @@
   let floatingContainer = null;
 
   // --- Selection Detection ---
-  document.addEventListener('mouseup', (e) => {
+  let isOurClick = false;
+
+  document.addEventListener('pointerup', (e) => {
+    // Ignore clicks on our own UI
+    if (e.target.closest('.tf-floating-btn') || e.target.closest('.tf-menu') || e.target.closest('.tf-result') || e.target.closest('.tf-error')) {
+      isOurClick = true;
+      setTimeout(() => { isOurClick = false; }, 100);
+      return;
+    }
+
     setTimeout(() => {
+      if (isOurClick) return;
+
       const selection = window.getSelection();
       if (!selection || selection.toString().trim().length === 0) return;
       if (selection.rangeCount === 0) return;
@@ -32,15 +43,25 @@
       const text = selection.toString().trim();
       if (text.length < 2) return;
 
-      // Ignore if clicking inside our own UI
-      if (e.target.closest('.tf-container')) return;
-
       const range = selection.getRangeAt(0);
       const rect = range.getBoundingClientRect();
+      if (!rect || rect.width === 0) return;
 
       activeText = text;
       showFloatingButton(rect);
-    }, 10);
+    }, 20);
+  });
+
+  // Hide on outside click
+  document.addEventListener('pointerdown', (e) => {
+    if (floatingContainer && !e.target.closest('.tf-container') && !e.target.closest('.tf-result')) {
+      setTimeout(removeUI, 100);
+    }
+  });
+
+  // Hide on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') removeUI();
   });
 
   // --- Floating Button ---
@@ -49,13 +70,25 @@
 
     floatingContainer = document.createElement('div');
     floatingContainer.className = 'tf-container';
+    floatingContainer.style.cssText = 'position:fixed;z-index:2147483647;top:0;left:0;width:0;height:0;';
 
     const btn = document.createElement('button');
     btn.className = 'tf-floating-btn';
-    btn.textContent = '✨ TextFlow';
+
+    // Load quota display
+    chrome.storage.local.get('auth', (result) => {
+      const auth = result.auth || {};
+      if (auth.plan === 'free') {
+        const remaining = Math.max(0, 5 - (auth.usageToday || 0));
+        btn.textContent = remaining > 0 ? '✨ TextFlow (' + remaining + '/5)' : '⛔ TextFlow (0/5)';
+        if (remaining === 0) btn.title = 'Limite diário atingido. Assine o Pro para uso ilimitado.';
+      }
+    });
+    if (!btn.textContent) btn.textContent = '✨ TextFlow';
 
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
+      e.preventDefault();
       if (e.shiftKey) {
         chrome.storage.local.get('lastTone', (result) => {
           if (result.lastTone) {
@@ -69,56 +102,65 @@
       }
     });
 
+    // Inline styles for maximum compatibility (overrides host page CSS)
+    btn.style.cssText =
+      'all:initial;position:fixed;z-index:2147483647;' +
+      'background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;' +
+      'padding:8px 14px;font-size:13px;cursor:pointer;white-space:nowrap;' +
+      'box-shadow:0 4px 16px rgba(0,0,0,0.35);' +
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.3;' +
+      'transition:opacity 0.15s;opacity:0;';
+
     floatingContainer.appendChild(btn);
     document.body.appendChild(floatingContainer);
 
-    // Position near selection (viewport-relative — both button and menu use position:fixed)
-    let btnTop = rect.bottom + 6;
-    const btnHeight = 34; // approximate
-    const menuHeight = 240; // approximate max menu height
+    // Position: rect values are viewport-relative (from getBoundingClientRect)
+    // Use these directly since button is position:fixed (viewport-relative too)
+    requestAnimationFrame(() => {
+      const btnW = btn.offsetWidth || 140;
+      const btnH = btn.offsetHeight || 34;
 
-    // If button would go below viewport, show above selection instead
-    if (btnTop + btnHeight + menuHeight > window.innerHeight) {
-      btnTop = rect.top - btnHeight - 6;
-    }
-    // Clamp to visible area
-    btnTop = Math.max(4, Math.min(btnTop, window.innerHeight - btnHeight - 4));
+      let top = rect.bottom + 8;
+      let left = rect.left;
 
-    const btnLeft = Math.max(4, Math.min(rect.left, window.innerWidth - 164));
-
-    btn.style.top = btnTop + 'px';
-    btn.style.left = btnLeft + 'px';
-
-    // Fade-in animation
-    btn.style.opacity = '0';
-    requestAnimationFrame(() => { btn.style.opacity = '1'; });
-
-    // Load quota display
-    chrome.storage.local.get('auth', (result) => {
-      const auth = result.auth || {};
-      if (auth.plan === 'free') {
-        const remaining = Math.max(0, 5 - (auth.usageToday || 0));
-        btn.textContent = remaining > 0 ? '✨ TextFlow (' + remaining + '/5)' : '⛔ TextFlow (0/5)';
-        if (remaining === 0) {
-          btn.title = 'Limite diário atingido. Assine o Pro para uso ilimitado.';
-        }
+      // If button extends below viewport (with room for menu), flip above
+      if (top + btnH + 260 > window.innerHeight) {
+        top = rect.top - btnH - 8;
       }
+
+      // Clamp to viewport
+      top = Math.max(4, Math.min(top, window.innerHeight - btnH - 4));
+      left = Math.max(4, Math.min(left, window.innerWidth - btnW - 4));
+
+      btn.style.top = top + 'px';
+      btn.style.left = left + 'px';
+      btn.style.opacity = '1';
     });
   }
 
   // --- Action Menu ---
   function showMenu(anchorBtn) {
-    // Remove existing menu
     const existing = floatingContainer.querySelector('.tf-menu');
     if (existing) { existing.remove(); return; }
 
     const menu = document.createElement('div');
     menu.className = 'tf-menu';
+    menu.style.cssText =
+      'all:initial;position:fixed;z-index:2147483646;' +
+      'background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,0.2);' +
+      'padding:6px;min-width:160px;' +
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;';
 
     ACTIONS.forEach((action) => {
       const item = document.createElement('button');
-      item.className = 'tf-menu-item';
+      item.style.cssText =
+        'all:initial;display:block;width:100%;padding:10px 14px;' +
+        'font-size:13px;color:#1a1a2e;cursor:pointer;border-radius:6px;' +
+        'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
+        'box-sizing:border-box;text-align:left;';
       item.textContent = action.label;
+      item.addEventListener('mouseenter', () => { item.style.background = '#f0f0f5'; });
+      item.addEventListener('mouseleave', () => { item.style.background = ''; });
       item.addEventListener('click', (e) => {
         e.stopPropagation();
         menu.remove();
@@ -133,26 +175,38 @@
 
     floatingContainer.appendChild(menu);
 
-    // Position below or above button
-    const btnRect = anchorBtn.getBoundingClientRect();
-    let menuTop = btnRect.bottom + 4;
-    if (menuTop + 250 > window.innerHeight) {
-      menuTop = btnRect.top - 250;
-    }
-    const menuLeft = Math.max(4, Math.min(btnRect.left, window.innerWidth - 170));
-    menu.style.top = menuTop + 'px';
-    menu.style.left = menuLeft + 'px';
+    requestAnimationFrame(() => {
+      const btnRect = anchorBtn.getBoundingClientRect();
+      let menuTop = btnRect.bottom + 4;
+      if (menuTop + 260 > window.innerHeight) {
+        menuTop = btnRect.top - menu.offsetHeight - 4;
+      }
+      const menuLeft = Math.max(4, Math.min(btnRect.left, window.innerWidth - menu.offsetWidth - 4));
+      menu.style.top = menuTop + 'px';
+      menu.style.left = menuLeft + 'px';
+    });
   }
 
   // --- Tone Submenu ---
   function showToneMenu(anchorBtn) {
     const menu = document.createElement('div');
     menu.className = 'tf-menu';
+    menu.style.cssText =
+      'all:initial;position:fixed;z-index:2147483646;' +
+      'background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,0.2);' +
+      'padding:6px;min-width:160px;' +
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;';
 
     TONES.forEach((tone) => {
       const item = document.createElement('button');
-      item.className = 'tf-menu-item';
+      item.style.cssText =
+        'all:initial;display:block;width:100%;padding:10px 14px;' +
+        'font-size:13px;color:#1a1a2e;cursor:pointer;border-radius:6px;' +
+        'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
+        'box-sizing:border-box;text-align:left;';
       item.textContent = tone.label;
+      item.addEventListener('mouseenter', () => { item.style.background = '#f0f0f5'; });
+      item.addEventListener('mouseleave', () => { item.style.background = ''; });
       item.addEventListener('click', (e) => {
         e.stopPropagation();
         menu.remove();
@@ -163,9 +217,16 @@
 
     floatingContainer.appendChild(menu);
 
-    const btnRect = anchorBtn.getBoundingClientRect();
-    menu.style.top = (btnRect.bottom + 4) + 'px';
-    menu.style.left = btnRect.left + 'px';
+    requestAnimationFrame(() => {
+      const btnRect = anchorBtn.getBoundingClientRect();
+      let menuTop = btnRect.bottom + 4;
+      if (menuTop + 200 > window.innerHeight) {
+        menuTop = btnRect.top - menu.offsetHeight - 4;
+      }
+      const menuLeft = Math.max(4, Math.min(btnRect.left, window.innerWidth - menu.offsetWidth - 4));
+      menu.style.top = menuTop + 'px';
+      menu.style.left = menuLeft + 'px';
+    });
   }
 
   // --- Process Text ---
@@ -288,18 +349,6 @@
       floatingContainer = null;
     }
   }
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.tf-container')) {
-      removeUI();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      removeUI();
-    }
-  });
 
   // --- Keyboard Shortcut Listener (from background) ---
   chrome.runtime.onMessage.addListener((message) => {
