@@ -48,4 +48,5 @@ logger.info(null, 'TextFlow backend running', { port });
 serve({
   fetch: app.fetch,
   port,
+  hostname: '0.0.0.0',
 });
