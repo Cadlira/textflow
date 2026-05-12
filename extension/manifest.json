@@ -8,8 +8,8 @@
   ],
   "host_permissions": [
     "http://localhost:3000/*",
-    "https://textflow.onrender.com/*",
-    "https://api.textflow.app/*"
+    "https://textflow.online/*",
+    "https://api.textflow.online/*"
   ],
   "background": {
     "service_worker": "background/background.js",

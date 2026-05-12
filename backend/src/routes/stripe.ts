@@ -23,8 +23,8 @@ stripeRoutes.post('/checkout', authMiddleware, async (c) => {
     payment_method_types: ['card'],
     customer_email: user.email,
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: 'https://textflow.app/success?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'https://textflow.app/cancel',
+    success_url: 'https://textflow.online/success?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'https://textflow.online/cancel',
     metadata: { userId, plan },
   });
 
@@ -42,7 +42,7 @@ stripeRoutes.post('/portal', authMiddleware, async (c) => {
 
   const session = await stripe.billingPortal.sessions.create({
     customer: user.stripeCustomerId,
-    return_url: 'https://textflow.app/account',
+    return_url: 'https://textflow.online/account',
   });
 
   return c.json({ url: session.url });
