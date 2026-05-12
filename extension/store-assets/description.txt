@@ -1,0 +1,34 @@
+TextFlow — Assistente de texto com IA. Selecione qualquer texto em qualquer site e reescreva, resuma, corrija ou ajuste o tom com um clique.
+
+✨ RECURSOS PRINCIPAIS
+Selecione qualquer texto em qualquer site e transforme com um clique — sem copiar e colar, sem trocar de aba, sem interromper seu fluxo.
+
+5 AÇÕES DISPONÍVEIS
+• Reescrever — reformule o texto mantendo o sentido original, com clareza e estilo aprimorado
+• Resumir — condense parágrafos longos em ideias essenciais, direto ao ponto
+• Corrigir — corrija ortografia, gramática e concordância automaticamente
+• Mudar Tom — adapte o texto para profissional, casual, empático, persuasivo ou qualquer tom desejado
+• Expandir — desenvolva ideias curtas em textos mais completos e detalhados
+
+COMO FUNCIONA
+1. Selecione qualquer texto em qualquer site
+2. Clique no botão flutuante do TextFlow que aparece ao lado da seleção
+3. Escolha uma das 5 ações no menu
+4. Veja o resultado inline, no mesmo lugar — edite, copie ou substitua o original
+
+PLANOS
+• Grátis — 5 utilizações por dia, acesso a todas as ações
+• Pro — R$19/mês, utilizações ilimitadas, modelos de IA otimizados
+• Pro+ — R$39/mês, ilimitado + acesso a modelos avançados, histórico completo e suporte prioritário
+
+PRIVACIDADE E SEGURANÇA
+Seu texto é processado exclusivamente via nossa API própria. Nenhum dado textual é vendido, compartilhado com terceiros ou armazenado em nossos servidores após o processamento. Não coletamos dados de navegação. Sua privacidade é absoluta.
+
+TECNOLOGIA
+O TextFlow utiliza integração com OpenRouter para acessar os modelos de IA de última geração, incluindo GPT-4, Claude, Gemini e outros, garantindo sempre o melhor resultado para cada tipo de transformação de texto.
+
+PERMISSÕES
+A extensão solicita permissão para acessar o texto selecionado nas páginas que você visita. Essa permissão é usada exclusivamente para processar o texto que você escolher transformar. Nenhum dado é coletado passivamente.
+
+SUPORTE
+Dúvidas, sugestões ou problemas? Entre em contato pelo site ou pelo e-mail de suporte listado na página da extensão.

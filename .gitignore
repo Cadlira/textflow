@@ -33,3 +33,6 @@ coverage/
 
 # Planning artifacts (consumed during development)
 .claude/skills/textflow-engineer/outputs/
+
+# Chrome Web Store generated assets (regenerable via scripts/generate-store-assets.js)
+extension/store-assets/*.png

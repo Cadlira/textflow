@@ -1,7 +1,7 @@
 // TextFlow — Service Worker
 // Gerencia autenticação e proxy para o backend
 
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'https://textflow.onrender.com';
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('[TextFlow] Extension installed');
